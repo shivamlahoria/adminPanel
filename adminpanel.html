@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SelfProject</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  
+  </head>
+  <body>
+    <p>You are successfully Logged in</p>
+
+    <script>
+      debugger;
+      document.addEventListener('DOMContentLoaded', () => {
+        debugger;
+          async function getData() {
+              const res = await fetch("http://localhost:3000/users");
+              const data = await res.json();
+
+              console.log(data);
+              debugger;
+              let tableElement = document.getElementById("userTable");
+              if (tableElement) {
+                  Object.keys(data).forEach((key) => {
+                      let tableRow = document.createElement("tr");
+                      let tableData1 = document.createElement("td");
+                      tableData1.innerHTML = data[key].username;
+
+                      let tableData2 = document.createElement("td");
+                      tableData2.innerHTML = data[key].email;
+
+                      let tableData3 = document.createElement("td");
+                      tableData3.innerHTML = data[key].password;
+
+                      tableRow.appendChild(tableData1);
+                      tableRow.appendChild(tableData2);
+                      tableRow.appendChild(tableData3);
+                      tableRow.style.border = "1px solid black";
+
+                      tableElement.appendChild(tableRow);
+                  })
+              }
+          }
+          getData();
+      })
+  </script>
+
+    <table id="userTable" style="border:1px solid black;">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </table>
+  </body>
+</html>
